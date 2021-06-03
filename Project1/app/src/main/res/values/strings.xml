@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Project1</string>
+    <string name="edt_user">User name</string>
+    <string name="edt_passwords">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">Signup</string>
 </resources>
