@@ -38,7 +38,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="92dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/signup_btn"
+        app:layout_constraintEnd_toStartOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
@@ -50,5 +52,6 @@
         android:layout_marginEnd="72dp"
         android:text="@string/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_signup"
         app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>
