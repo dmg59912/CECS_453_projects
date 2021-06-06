@@ -10,4 +10,9 @@
     <string name="email_edt">Email</string>
     <string name="Phone_edt">Phone</string>
     <string name="Sign_me_btn">Sign me up!</string>
+    <string name="nameerror">Invalid username</string>
+    <string name="passerror">Invalid password</string>
+    <string name="repasserror">Passwords do not match</string>
+    <string name="emailerror">Invalid email</string>
+    <string name="phoneerror">Invalid phone number</string>
 </resources>
