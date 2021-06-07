@@ -23,14 +23,14 @@ public class signupActivity extends AppCompatActivity
 
     private AwesomeValidation awesomeValidation;
 
-    private Data credentialData;
-
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Intent intent = getIntent();
 
         context = getApplicationContext();
 
@@ -45,9 +45,9 @@ public class signupActivity extends AppCompatActivity
         btnSignup = findViewById(R.id.btn_sign_me);
 
         //Adds regular expression validation to all of the editText boxes
-        /*awesomeValidation.addValidation(this,R.id.edt_username,"[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",R.string.nameerror);
-        awesomeValidation.addValidation(this,R.id.edt_password_sg,"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\\]).{8,32}$",R.string.passerror);
-        awesomeValidation.addValidation(this,R.id.edt_retype_pass,edtPassword.getText().toString(),R.string.repasserror);
+        awesomeValidation.addValidation(this,R.id.edt_username,"[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",R.string.nameerror);
+        awesomeValidation.addValidation(this,R.id.edt_password_sg,"^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",R.string.passerror);
+        awesomeValidation.addValidation(this,R.id.edt_retype_pass, R.id.edt_password_sg,R.string.repasserror);
         awesomeValidation.addValidation(this,R.id.edt_email, Patterns.EMAIL_ADDRESS,R.string.emailerror);
         awesomeValidation.addValidation(this,R.id.edt_phone_sg,"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$",R.string.phoneerror);
 
@@ -60,19 +60,19 @@ public class signupActivity extends AppCompatActivity
 
 
                 //If the users credentials are added to the data class...
-                if(awesomeValidation.validate() && !credentialData.CheckUsername(usernameCred)){
+                if(awesomeValidation.validate() && !MainActivity.data.CheckUsername(usernameCred)){
 
-                    credentialData.AddCredential(usernameCred,passwordCred);
+                    MainActivity.data.AddCredential(usernameCred,passwordCred);
 
                     Toast.makeText(signupActivity.this, "Credentials validated and added!", Toast.LENGTH_SHORT).show();
 
                     Intent welcomeActivity = new Intent(context, welcomeActivity.class);
-                    welcomeActivity.putExtra("username", usernameCred);
+                    welcomeActivity.putExtra("Username", usernameCred);
                     startActivity(welcomeActivity);
 
                     return;
 
-                }else if(awesomeValidation.validate() && credentialData.CheckUsername(usernameCred)){
+                }else if(awesomeValidation.validate() && MainActivity.data.CheckUsername(usernameCred)){
 
                     Toast.makeText(signupActivity.this, "Username already exists, Try Again.", Toast.LENGTH_SHORT).show();
 
@@ -83,7 +83,7 @@ public class signupActivity extends AppCompatActivity
 
             }
         });
-*/
+
 
 
     }

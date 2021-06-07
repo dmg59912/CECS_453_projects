@@ -18,7 +18,7 @@ public class welcomeActivity extends AppCompatActivity {
         txtuser = findViewById(R.id.txt_welcome);
 
         Intent intent = getIntent();
-        String user = intent.getStringExtra("Info");
-        txtuser.setText(user);
+        String user = intent.getStringExtra("Username");
+        txtuser.setText("Welcome " + user + "!");
     }
 }
