@@ -30,12 +30,12 @@ public class signupActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        Intent intent = getIntent();
-
+        //
         context = getApplicationContext();
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
+        // Initialize the EditText and Buttonsfrom the View
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password_sg);
         edtRetype = findViewById(R.id.edt_retype_pass);
@@ -51,32 +51,35 @@ public class signupActivity extends AppCompatActivity
         awesomeValidation.addValidation(this,R.id.edt_email, Patterns.EMAIL_ADDRESS,R.string.emailerror);
         awesomeValidation.addValidation(this,R.id.edt_phone_sg,"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$",R.string.phoneerror);
 
-
+        // set an onClickListener to the Signup Button
         btnSignup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
 
+                // Get the essential login credentials
                 String usernameCred = edtUsername.getText().toString();
                 String passwordCred = edtPassword.getText().toString();
 
-
-                //If the users credentials are added to the data class...
+                // If the users credentials are valid for the data class to add...
                 if(awesomeValidation.validate() && !MainActivity.data.CheckUsername(usernameCred)){
 
+                    // Add the credentials
                     MainActivity.data.AddCredential(usernameCred,passwordCred);
 
+                    // Message the user for success
                     Toast.makeText(signupActivity.this, "Credentials validated and added!", Toast.LENGTH_SHORT).show();
 
+                    // Set the intent to the welcomeActivity and send it the username string
                     Intent welcomeActivity = new Intent(context, welcomeActivity.class);
                     welcomeActivity.putExtra("Username", usernameCred);
                     startActivity(welcomeActivity);
 
                     return;
 
-                }else if(awesomeValidation.validate() && MainActivity.data.CheckUsername(usernameCred)){
+                }else if(awesomeValidation.validate() && MainActivity.data.CheckUsername(usernameCred)){ // Username already exists in Data class
 
                     Toast.makeText(signupActivity.this, "Username already exists, Try Again.", Toast.LENGTH_SHORT).show();
 
-                } else{
+                } else{ // Credentials are input incorrectly
 
                     Toast.makeText(signupActivity.this, "Invalid Credentials, Try Again.", Toast.LENGTH_SHORT).show();
                 }
