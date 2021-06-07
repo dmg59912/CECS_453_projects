@@ -15,7 +15,8 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 
 
-public class signupActivity extends AppCompatActivity {
+public class signupActivity extends AppCompatActivity
+{
 
     private EditText edtUsername, edtPassword, edtRetype, edtEmail, edtPhone;
     private Button btnSignup;
@@ -44,7 +45,7 @@ public class signupActivity extends AppCompatActivity {
         btnSignup = findViewById(R.id.btn_sign_me);
 
         //Adds regular expression validation to all of the editText boxes
-        awesomeValidation.addValidation(this,R.id.edt_username,"[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",R.string.nameerror);
+        /*awesomeValidation.addValidation(this,R.id.edt_username,"[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",R.string.nameerror);
         awesomeValidation.addValidation(this,R.id.edt_password_sg,"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\\]).{8,32}$",R.string.passerror);
         awesomeValidation.addValidation(this,R.id.edt_retype_pass,edtPassword.getText().toString(),R.string.repasserror);
         awesomeValidation.addValidation(this,R.id.edt_email, Patterns.EMAIL_ADDRESS,R.string.emailerror);
@@ -82,7 +83,10 @@ public class signupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
     }
+
+
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 public class Data {
 
     // A hashmap data structure for holding usernames and passwords pair
-    HashMap <String, String> hmCredentials;
+   public static HashMap <String, String> hmCredentials;
 
     public Data(){
 
@@ -20,12 +20,12 @@ public class Data {
     }
 
     // This method adds a new username and password to the hashmap
-    public void AddCredential(String username, String password){
+    public static void AddCredential(String username, String password){
         hmCredentials.put(username, password);
     }
 
     // This method checks if username exists in the hashmap
-    public Boolean CheckUsername(String username){
+    public static Boolean CheckUsername(String username){
         Boolean  retval = false;
 
         // If the HashMap is empty... return the false
@@ -62,7 +62,7 @@ public class Data {
     }
 
     // This method checks a username and password combination is correct!
-    public Boolean CheckCredentials(String username, String Password){
+    public static Boolean CheckCredentials(String username, String Password){
         Boolean  retval = false;
 
 
