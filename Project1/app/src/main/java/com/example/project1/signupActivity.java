@@ -69,8 +69,8 @@ public class signupActivity extends AppCompatActivity
                     Toast.makeText(signupActivity.this, "Credentials validated and added!", Toast.LENGTH_SHORT).show();
 
                     // Set the intent to the welcomeActivity and send it the username string
-                    Intent welcomeActivity = new Intent(context, welcomeActivity.class);
-                    welcomeActivity.putExtra("Username", usernameCred);
+                    Intent welcomeActivity = new Intent(context, MainActivity.class);
+                    //welcomeActivity.putExtra("Username", usernameCred);
                     startActivity(welcomeActivity);
 
                     return;
