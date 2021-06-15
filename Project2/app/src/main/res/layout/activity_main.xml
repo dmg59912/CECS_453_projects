@@ -11,6 +11,7 @@
         android:name="com.example.project2.imageFragment"
         android:layout_width="match_parent"
         android:layout_height="502dp"
+        android:background="#769358"
         app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,9 +25,39 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginBottom="4dp"
+        android:background="#AFB42B"
+        android:backgroundTint="#852929"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="#D3C8C8"
+        android:text="NEXT"
+        android:textColor="#0344A6"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="#D3C8C8"
+        android:text="BACK"
+        android:textColor="#0344A6"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="@+id/fragmentContainerView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
