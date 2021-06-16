@@ -81,10 +81,9 @@ public class imageFragment extends Fragment {
             mParam1 = "0";
         }
 
-        img_animals.setImageResource(animalImages.get(Integer.parseInt(mParam1)));
+        img_animals.setImageResource(Integer.parseInt(mParam1));
 
-
-        Toast.makeText(container.getContext(), "New Image Fragment!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(container.getContext(), mParam2, Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         return view;
     }
