@@ -76,7 +76,12 @@ public class imageFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_image, container, false);
         img_animals = view.findViewById(R.id.img_animals);
-        img_animals.setImageResource(animalImages.get(5));
+
+        if(mParam1 == null){
+            mParam1 = "0";
+        }
+
+        img_animals.setImageResource(animalImages.get(Integer.parseInt(mParam1)));
 
 
         Toast.makeText(container.getContext(), "New Image Fragment!", Toast.LENGTH_SHORT).show();

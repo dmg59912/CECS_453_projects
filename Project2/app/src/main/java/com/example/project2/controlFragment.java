@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link controlFragment#newInstance} factory method to
@@ -19,10 +22,14 @@ import android.widget.CheckBox;
 public class controlFragment extends Fragment {
 
     private  int position = 0;
-    private String location;
-    private Fragment imgFrag;
+
     private Button btnBack, btnNext;
     private CheckBox chkGalleryView, chkSlideShow;
+
+    ArrayList<Integer> animalImages =  new ArrayList<>(Arrays.asList(
+            R.drawable.animal13, R.drawable.animal14,
+            R.drawable.animal15, R.drawable.animal16,
+            R.drawable.animal17, R.drawable.animal18));
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,7 +89,11 @@ public class controlFragment extends Fragment {
 
             @Override
             public void onClick(View v){
-                position++;show_Image();
+                if (position < animalImages.size()-1) {
+                    position++;
+                    show_Image();
+                }
+
             }
 
         });
@@ -90,7 +101,11 @@ public class controlFragment extends Fragment {
 
             @Override
             public void onClick(View v){
-                position--;show_Image();
+                if (position > 0) {
+                    position--;
+                    show_Image();
+                }
+
             }
 
         });
