@@ -22,10 +22,6 @@ public class imageFragment extends Fragment {
 
 
     private ImageView img_animals;
-    ArrayList<Integer> animalImages =  new ArrayList<>(Arrays.asList(
-            R.drawable.animal13, R.drawable.animal14,
-            R.drawable.animal15, R.drawable.animal16,
-            R.drawable.animal17, R.drawable.animal18));
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,12 +72,10 @@ public class imageFragment extends Fragment {
         img_animals = view.findViewById(R.id.img_animals);
 
         if(mParam1 == null){
-            mParam1 = "0";
+            mParam1 = Integer.toString(R.drawable.animal13);
         }
 
         img_animals.setImageResource(Integer.parseInt(mParam1));
-
-        Toast.makeText(container.getContext(), mParam2, Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         return view;
     }

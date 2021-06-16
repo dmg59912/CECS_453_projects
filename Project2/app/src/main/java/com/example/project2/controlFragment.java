@@ -5,11 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,25 +83,47 @@ public class controlFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_control, container, false);
 
+        // Create the Handler object (on the main thread by default)
+        Handler handler = new Handler();
+
+        // Define the code block to be executed
+        Runnable runnableCode = new Runnable() {
+            @Override
+            public void run() {
+                // Do something here on the main thread
+                if (position < animalImages.size()-1) {
+                    position++;
+                }else {
+                    position = 0;
+                }
+                show_Image();
+                // Repeat this the same runnable code block again another 2 seconds
+                // 'this' is referencing the Runnable object
+                handler.postDelayed(this, 2000);
+            }
+        };
 
         btnBack = view.findViewById(R.id.btnBack);
         btnNext = view.findViewById(R.id.btnNext);
         chkGalleryView = view.findViewById(R.id.chkGalleryView);
         chkSlideShow = view.findViewById(R.id.chkSlideShow);
 
+        chkGalleryView.setChecked(true);
+        btnBack.setEnabled(false);
+
         //btnNext loads the next imagine and if it is out of range the button will be disable
         btnNext.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                btnBack.setEnabled(true);
                 if (position < animalImages.size()-1) {
                     position++;
                     show_Image();
-                    btnNext.setEnabled(true);
-                    btnBack.setEnabled(true);
+                    if(position == animalImages.size()-1)
+                        btnNext.setEnabled(false);
+                    else
+                        btnNext.setEnabled(true);
                 }
-                else
-                    btnNext.setEnabled(false);
-
             }
 
         });
@@ -107,23 +132,63 @@ public class controlFragment extends Fragment {
 
             @Override
             public void onClick(View v){
+                btnNext.setEnabled(true);
                 if (position > 0) {
                     position--;
                     show_Image();
-                    btnBack.setEnabled(true);
-                    btnNext.setEnabled(true);
+                    if (position == 0)
+                        btnBack.setEnabled(false);
+                    else
+                        btnBack.setEnabled(true);
                 }
-                else
-                    btnBack.setEnabled(false);
 
             }
 
         });
 
+        chkGalleryView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        chkGalleryView.setOnCheckedChangeListener(new View.On);
+                if(chkSlideShow.isChecked()){
+                    chkSlideShow.setChecked(false);
+                }
+
+                if(position > 0)
+                    btnBack.setEnabled(true);
+
+                if(position < animalImages.size() -1)
+                    btnNext.setEnabled(true);
+
+                handler.removeCallbacks(runnableCode);
+            }
+        });
+
+        chkSlideShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(chkGalleryView.isChecked()){
+                    chkSlideShow.setChecked(false);
+                }
+
+                btnBack.setEnabled(false);
+                btnNext.setEnabled(false);
+
+                // Start the initial runnable task by posting through the handler
+                handler.post(runnableCode);
+
+            }
+        });
 
         return view;
+    }
+
+    public void Check(View v){
+        if(chkGalleryView.isChecked()){
+            btnBack.setEnabled(true);
+            btnNext.setEnabled(true);
+        }
     }
 
     private void show_Image(){
