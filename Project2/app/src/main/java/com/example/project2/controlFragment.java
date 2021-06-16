@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +16,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class controlFragment extends Fragment {
+
+    private Button btnBack, btnNext;
+    private CheckBox chkGalleryView, chkSlideShow;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +64,51 @@ public class controlFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_control, container, false);
+        View view = inflater.inflate(R.layout.fragment_control, container, false);
+
+        btnBack = view.findViewById(R.id.btnBack);
+        btnNext = view.findViewById(R.id.btnNext);
+        chkGalleryView = view.findViewById(R.id.chkGalleryView);
+        chkSlideShow = view.findViewById(R.id.chkSlideShow);
+
+        btnNext.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                showNextImage();
+            }
+
+        });
+        btnBack.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                showLastImage();
+            }
+
+        });
+
+        return view;
     }
+
+    private void showNextImage(){
+        Fragment imgFrag = new imageFragment();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.imgFrag, imgFrag)
+                .addToBackStack("")
+                .commit();
+    }
+
+    private void showLastImage(){
+        Fragment imgFrag = new imageFragment();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.imgFrag, imgFrag)
+                .addToBackStack("")
+                .commit();
+    }
+
 }

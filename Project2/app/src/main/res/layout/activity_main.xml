@@ -7,26 +7,25 @@
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/imgFrag"
         android:name="com.example.project2.imageFragment"
         android:layout_width="match_parent"
-        android:layout_height="502dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView2"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toTopOf="@+id/ctrlFrag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
+        android:id="@+id/ctrlFrag"
         android:name="com.example.project2.controlFragment"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFrag" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
