@@ -76,6 +76,7 @@ public class controlFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_control, container, false);
 
@@ -119,11 +120,14 @@ public class controlFragment extends Fragment {
 
         });
 
+
+        chkGalleryView.setOnCheckedChangeListener(new View.On);
+
         return view;
     }
 
     private void show_Image(){
-        Fragment imgFrag = imageFragment.newInstance(Integer.toString(position), "New Image Frag");
+        Fragment imgFrag = imageFragment.newInstance(Integer.toString(animalImages.get(position)), "New Image Fragment!");
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.imgFrag, imgFrag)
