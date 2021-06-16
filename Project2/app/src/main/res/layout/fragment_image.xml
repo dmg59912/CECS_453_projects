@@ -4,4 +4,5 @@
     android:id="@+id/frgImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EA92B8"
     tools:context=".imageFragment" />
