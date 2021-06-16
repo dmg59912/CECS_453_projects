@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +19,15 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class imageFragment extends Fragment {
+
+    private String location;
+    private int position;
+
+    private ImageView img_animals;
+    ArrayList<Integer> animalImages =  new ArrayList<>(Arrays.asList(
+            R.drawable.animal13, R.drawable.animal14,
+            R.drawable.animal15, R.drawable.animal16,
+            R.drawable.animal17, R.drawable.animal18));
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,10 +71,16 @@ public class imageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
+
+        View view = inflater.inflate(R.layout.fragment_image, container, false);
+        img_animals = view.findViewById(R.id.img_animals);
+        img_animals.setImageResource(animalImages.get(5));
+
 
         Toast.makeText(container.getContext(), "New Image Fragment!", Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_image, container, false);
+        return view;
     }
 }

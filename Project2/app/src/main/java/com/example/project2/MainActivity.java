@@ -7,7 +7,9 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+
 
     ArrayList<Integer> animalImages =  new ArrayList<>(Arrays.asList(
             R.drawable.animal13, R.drawable.animal14,
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imgFrag = imageFragment.newInstance()
+
+
     }
 }

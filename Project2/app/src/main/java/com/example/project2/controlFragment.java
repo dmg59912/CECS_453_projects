@@ -3,6 +3,7 @@ package com.example.project2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import android.widget.CheckBox;
  */
 public class controlFragment extends Fragment {
 
+    private  int position = 0;
+    private String location;
+    private Fragment imgFrag;
     private Button btnBack, btnNext;
     private CheckBox chkGalleryView, chkSlideShow;
 
@@ -68,6 +72,7 @@ public class controlFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_control, container, false);
 
+
         btnBack = view.findViewById(R.id.btnBack);
         btnNext = view.findViewById(R.id.btnNext);
         chkGalleryView = view.findViewById(R.id.chkGalleryView);
@@ -77,7 +82,7 @@ public class controlFragment extends Fragment {
 
             @Override
             public void onClick(View v){
-                showNextImage();
+                position++;show_Image();
             }
 
         });
@@ -85,7 +90,7 @@ public class controlFragment extends Fragment {
 
             @Override
             public void onClick(View v){
-                showLastImage();
+                position--;show_Image();
             }
 
         });
@@ -93,22 +98,12 @@ public class controlFragment extends Fragment {
         return view;
     }
 
-    private void showNextImage(){
-        Fragment imgFrag = new imageFragment();
+    private void show_Image(){
+        Fragment imgFrag = imageFragment.newInstance(Integer.toString(position), "New Image Frag");
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.imgFrag, imgFrag)
                 .addToBackStack("")
                 .commit();
     }
-
-    private void showLastImage(){
-        Fragment imgFrag = new imageFragment();
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.imgFrag, imgFrag)
-                .addToBackStack("")
-                .commit();
-    }
-
 }
