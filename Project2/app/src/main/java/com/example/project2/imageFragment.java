@@ -20,8 +20,6 @@ import java.util.Arrays;
  */
 public class imageFragment extends Fragment {
 
-    private String location;
-    private int position;
 
     private ImageView img_animals;
     ArrayList<Integer> animalImages =  new ArrayList<>(Arrays.asList(

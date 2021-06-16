@@ -85,18 +85,23 @@ public class controlFragment extends Fragment {
         chkGalleryView = view.findViewById(R.id.chkGalleryView);
         chkSlideShow = view.findViewById(R.id.chkSlideShow);
 
+        //btnNext loads the next imagine and if it is out of range the button will be disable
         btnNext.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v){
                 if (position < animalImages.size()-1) {
                     position++;
                     show_Image();
+                    btnNext.setEnabled(true);
+                    btnBack.setEnabled(true);
                 }
+                else
+                    btnNext.setEnabled(false);
 
             }
 
         });
+        //btnBack loads prvious imagine and if out of range, the btnBack will be disable
         btnBack.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -104,7 +109,11 @@ public class controlFragment extends Fragment {
                 if (position > 0) {
                     position--;
                     show_Image();
+                    btnBack.setEnabled(true);
+                    btnNext.setEnabled(true);
                 }
+                else
+                    btnBack.setEnabled(false);
 
             }
 

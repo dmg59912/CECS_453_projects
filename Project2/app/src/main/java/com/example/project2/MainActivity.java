@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity
             R.drawable.animal15, R.drawable.animal16,
             R.drawable.animal17, R.drawable.animal18));
 
-    private imageFragment imgFrag;
-    private controlFragment ctrlFrag;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
