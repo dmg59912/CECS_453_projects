@@ -23,10 +23,13 @@
         This layout is a two-pane layout for the Songs
         master/detail flow.
 
-        -->
+        --><![CDATA[
+        //tools:listitem="@layout/song_list_content"
+            />
+
+        ]]>
+
         <androidx.recyclerview.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/car_list"
             android:name="com.example.android.car.carDetailFragment"
             android:layout_width="300dp"
@@ -34,9 +37,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:layoutManager="LinearLayoutManager"
-            tools:context="com.example.android.cardetailstart.MainActivity"/>
-            //tools:listitem="@layout/song_list_content"
-            />
+            tools:context="com.example.android.cardetailstart.MainActivity" />
 
         <FrameLayout
             android:id="@+id/car_detail_container"
