@@ -6,31 +6,33 @@
     android:layout_height="wrap_content">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/car_make"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentTop="true" />
+    <Spinner
+        android:id="@+id/spinner_make"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/car_model"
-        android:padding="10dp"
-        android:layout_below="@id/car_make"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize" />
+    <Spinner
+        android:id="@+id/spinner_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_make"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/car_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/car_model"
+        android:layout_below="@id/spinner_model"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginLeft="@dimen/standard_margin"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginRight="@dimen/standard_margin"
-        app:layoutManager="LinearLayoutManager">
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.example.android.songdetailstart.MainActivity"
+        tools:listitem="@layout/song_list_content" />>
 
 
     </androidx.recyclerview.widget.RecyclerView>

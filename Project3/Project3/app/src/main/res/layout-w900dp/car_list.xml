@@ -8,43 +8,21 @@
     android:layout_marginRight="10dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/spinner_make"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <Spinner
+        android:id="@+id/spinner_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_make" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:baselineAligned="false"
-        android:divider="?android:attr/dividerHorizontal"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        tools:context="com.example.android.cardetailstart.MainActivity">
-
-        <!--
-        This layout is a two-pane layout for the Songs
-        master/detail flow.
-
-        --><![CDATA[
-        //tools:listitem="@layout/song_list_content"
-            />
-
-        ]]>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/car_list"
-            android:name="com.example.android.car.carDetailFragment"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager"
-            tools:context="com.example.android.cardetailstart.MainActivity" />
-
-        <FrameLayout
-            android:id="@+id/car_detail_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3" />
-
-    </LinearLayout>
-
+        android:layout_height="match_parent" />
 </RelativeLayout>
