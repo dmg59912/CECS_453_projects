@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity
 
         //test place holders for now ///////////////////////////////////////////////////////
 
-        /////testing first url "https://thawing-beach-68207.herokuapp.com/carmakes";
         new GetCarMake().execute();
 
         car_make_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,11 +87,6 @@ public class MainActivity extends AppCompatActivity
 
                 new GetCarModel(selected_make).execute();
 
-                if(car_item_list.isEmpty())
-                    new GetCarList(selected_make,car_model_list.get(0).get("model")).execute();
-
-                RecyclerView rv = findViewById(R.id.car_list);
-                rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
             }
 
             @Override
@@ -107,8 +102,7 @@ public class MainActivity extends AppCompatActivity
 
                 new GetCarList(selected_make,selected_model).execute();
 
-                RecyclerView rv = findViewById(R.id.car_list);
-                rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
+                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -119,6 +113,10 @@ public class MainActivity extends AppCompatActivity
 
         });
 
+        RecyclerView rv = findViewById(R.id.car_list);
+        rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
+        
+        
     }
 
    private class GetCarMake extends AsyncTask<Void, Void, Void>
