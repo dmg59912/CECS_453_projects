@@ -33,7 +33,7 @@ public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleIt
     {
 
         holder.mIdView.setText(car_item_list.get(position).get("item_id"));
-        holder.mContentView.setText(car_item_list.get(position).get("model"));
+        holder.mContentView.setText(car_item_list.get(position).get("make") + ": " + car_item_list.get(position).get("model"));
 
 
        /*holder.mView.setOnClickListener(new View.OnClickListener(){

@@ -4,25 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -102,8 +96,6 @@ public class MainActivity extends AppCompatActivity
 
                 new GetCarList(selected_make,selected_model).execute();
 
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -113,8 +105,7 @@ public class MainActivity extends AppCompatActivity
 
         });
 
-        RecyclerView rv = findViewById(R.id.car_list);
-        rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
+
         
         
     }
@@ -298,6 +289,14 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            RecyclerView rv = findViewById(R.id.car_list_rv);
+            rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
+        }
+        
         private void getListJSON(String make, String model){
 
             String make_id = "";

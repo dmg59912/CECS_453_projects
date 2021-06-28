@@ -37,7 +37,7 @@
         tools:context="com.example.android.songdetailstart.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/car_list"
+            android:id="@+id/car_list_rv"
             android:layout_width="@dimen/item_width"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/standard_margin"
