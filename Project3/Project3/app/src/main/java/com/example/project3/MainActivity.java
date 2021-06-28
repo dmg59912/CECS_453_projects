@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
 
     ArrayList<HashMap<String,String>> car_make_list;
     ArrayList<HashMap<String,String>> car_model_list;
+    ArrayList<HashMap<String,String>> car_item_list;
 
     List<String> spinner_make_list;
     List<String> spinner_model_list;
@@ -64,10 +66,10 @@ public class MainActivity extends AppCompatActivity
         //Initialize car data variables
         car_make_list = new ArrayList<>();
         car_model_list = new ArrayList<>();
+        car_item_list = new ArrayList<>();
 
         spinner_make_list = new ArrayList<String>();
         spinner_model_list = new ArrayList<String>();
-
 
 
         if (findViewById(R.id.car_detail_container)!=null)
@@ -76,9 +78,7 @@ public class MainActivity extends AppCompatActivity
 
         //test place holders for now ///////////////////////////////////////////////////////
 
-        /////testing first url "https://thawing-beach-68207.herokuapp.com/carmakes";
         new GetCarMake().execute();
-
 
         car_make_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,26 +102,22 @@ public class MainActivity extends AppCompatActivity
                 selected_model = car_model_spinner.getItemAtPosition(position).toString();
 
                 new GetCarList(selected_make,selected_model).execute();
-                //Toast.makeText(MainActivity.this, selected_model, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
 
-
-        ////testing second url "https://thawing-beach-68207.herokuapp.com/cars/10/20/92603"
-        //new GetCarModel().execute();
-        //////////////////////////////////////////////////////////////////////////////
-
-        //RecyclerView car_view = findViewById(R.id.car_list);
-        //car_view.setAdapter(new SimpleItemRecyclerViewAdapter(car_make_list));
-
-
-
-
+        RecyclerView rv = findViewById(R.id.car_list);
+        rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
+        
+        
     }
 
    private class GetCarMake extends AsyncTask<Void, Void, Void>
@@ -305,12 +301,15 @@ public class MainActivity extends AppCompatActivity
 
         private void getListJSON(String make, String model){
 
-            String make_id;
-            String model_id;
+            String make_id = "";
+            String model_id = "";
+
+            car_item_list.clear();
 
             for(int i = 0; i < car_model_list.size(); i++)
-                if(car_model_list.get(i).get("vehicle_make").compareTo(make) == 0 && car_model_list.get(i).get("") {
-                    id = car_make_list.get(i).get("id");
+                if(car_model_list.get(i).get("model").compareTo(model) == 0 ) {
+                    make_id = car_model_list.get(i).get("vehicle_make_id");
+                    model_id = car_model_list.get(i).get("id");
                     break;
                 }
 
@@ -318,24 +317,41 @@ public class MainActivity extends AppCompatActivity
 
             //Calling jasonArray and Jason object to map our Arraylist<Hashmap>
             try {
-                String jsonStr = handler.makeServiceCall(url_model + id);
-                JSONArray c_models = new JSONArray(jsonStr);
+                String jsonStr = handler.makeServiceCall(url_list + make_id + "/" + model_id + "/92603");
+                JSONObject list = new JSONObject(jsonStr);
 
-                for(int i = 0 ; i < c_models.length(); ++i)
+                JSONArray c_list = list.getJSONArray("lists");
+
+                for(int i = 0 ; i < c_list.length(); ++i)
                 {
+                    JSONObject item = c_list.getJSONObject(i);
 
-                    JSONObject models_array  =  c_models.getJSONObject(i);
+                    String color = item.getString("color");
+                    String created = item.getString("created_at");
+                    String item_id = item.getString("id");
+                    String image_url = item.getString("image_url");
+                    String mileage = item.getString("mileage");
 
-                    String model = models_array.getString("model");
-                    String v_make_id = models_array.getString("vehicle_make_id");
+                    String price = item.getString("price");
+                    String veh_description = item.getString("veh_description");
 
-                    HashMap<String,String> vModel = new HashMap<>();
-                    vModel.put("id", id);
-                    vModel.put("model",model);
-                    vModel.put("vehicle_make_id",v_make_id);
+                    String vehicle_url = item.getString("vehicle_url");
+                    String vin_number = item.getString("vin_number");
 
-                    spinner_model_list.add(model);
-                    car_model_list.add(vModel);
+                    HashMap<String, String> vItem = new HashMap<>();
+
+                    vItem.put("color",color);
+                    vItem.put("created_at",created);
+                    vItem.put("item_id",item_id);
+                    vItem.put("image_url",image_url);
+                    vItem.put("mileage",mileage);
+                    vItem.put("model",selected_model);
+                    vItem.put("price",price);
+                    vItem.put("veh_description",veh_description);
+                    vItem.put("make", selected_make);
+                    vItem.put("vin_number",vin_number);
+
+                    car_item_list.add(vItem);
 
                 }
 
@@ -344,35 +360,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
-/*
-                    JSONObject models_array  =  c_models.getJSONObject(i);
-
-                    String color = models_array.getString("color");
-                    String created = models_array.getString("created_at");
-                    String id = models_array.getString("id");
-                    String image_url = models_array.getString("image_url");
-                    String mileage = models_array.getString("mileage");
-                    String model = models_array.getString("model");
-                    String price = models_array.getString("price");
-                    String veh_description = models_array.getString("veh_description");
-                    String vin_number = models_array.getString("vin_number");
-
-                    HashMap<String, String> vModels = new HashMap<>();
-
-                    vModels.put("color",color);
-                    vModels.put("created_at",created);
-                    vModels.put("id",id);
-                    vModels.put("image_url",image_url);
-                    vModels.put("mileage",mileage);
-                    vModels.put("model",model);
-                    vModels.put("price",price);
-                    vModels.put("veh_description",veh_description);
-                    vModels.put("vin_number",vin_number);
-
-                    car_model_list.add(vModels);
-                    */
-
 
 
 
