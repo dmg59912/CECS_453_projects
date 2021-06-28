@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     private static String url_make = "https://thawing-beach-68207.herokuapp.com/carmakes";
     private static String url_model = "https://thawing-beach-68207.herokuapp.com/carmodelmakes/";
+    private static String url_list = "https://thawing-beach-68207.herokuapp.com/cars/";
 
     ArrayList<HashMap<String,String>> car_make_list;
     ArrayList<HashMap<String,String>> car_model_list;
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selected_model = car_model_spinner.getItemAtPosition(position).toString();
 
-                Toast.makeText(MainActivity.this, selected_model, Toast.LENGTH_SHORT).show();
+                new GetCarList(selected_make,selected_model).execute();
+                //Toast.makeText(MainActivity.this, selected_model, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -281,17 +283,36 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
     private class GetCarList extends AsyncTask<Void,Void,Void>
     {
 
+        String selected_make;
+        String selected_model;
+
+        public GetCarList(String selected_make, String selected_model){
+            this.selected_make = selected_make;
+            this.selected_model = selected_model;
+        }
+
         @Override
         protected Void doInBackground(Void... voids) {
-            getListJSON();
+            getListJSON(selected_make, selected_model);
 
             return null;
         }
 
-        private void getListJSON(){
+        private void getListJSON(String make, String model){
+
+            String make_id;
+            String model_id;
+
+            for(int i = 0; i < car_model_list.size(); i++)
+                if(car_model_list.get(i).get("vehicle_make").compareTo(make) == 0 && car_model_list.get(i).get("") {
+                    id = car_make_list.get(i).get("id");
+                    break;
+                }
+
             HttpHandler handler = new HttpHandler();
 
             //Calling jasonArray and Jason object to map our Arraylist<Hashmap>
