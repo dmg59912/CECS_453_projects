@@ -1,7 +1,5 @@
 package com.example.project3;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +7,16 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project3.content.CarUtils;
-
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<CarUtils.Car> mValues;
+    private final ArrayList<HashMap<String,String>> car_item_list;
 
-    SimpleItemRecyclerViewAdapter(List<CarUtils.Car> items)
+    SimpleItemRecyclerViewAdapter(ArrayList<HashMap<String, String>> car_item_list)
     {
-        mValues = items;
+        this.car_item_list = car_item_list;
     }
 
     @Override
@@ -34,9 +31,9 @@ public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleIt
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position)
     {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(String.valueOf(position + 1));
-        holder.mContentView.setText(mValues.get(position).car_model);
+
+        holder.mIdView.setText(car_item_list.get(position).get("item_id"));
+        holder.mContentView.setText(car_item_list.get(position).get("model"));
 
 
        /*holder.mView.setOnClickListener(new View.OnClickListener(){
@@ -80,7 +77,7 @@ public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleIt
     @Override
     public int getItemCount()
     {
-        return mValues.size();
+        return car_item_list.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
@@ -88,14 +85,13 @@ public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleIt
         final View mView;
         final TextView mIdView;
         final TextView mContentView;
-        CarUtils.Car mItem;
 
         ViewHolder(View view)
         {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.id);
-            mContentView = view.findViewById(R.id.content);
+            mIdView = view.findViewById(R.id.car_id);
+            mContentView = view.findViewById(R.id.car_model);
 
         }
     }
