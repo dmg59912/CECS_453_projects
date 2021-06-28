@@ -8,17 +8,17 @@
 
     <Spinner
         android:id="@+id/spinner_make"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <Spinner
         android:id="@+id/spinner_model"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinner_make"/>
+        android:layout_below="@id/spinner_make" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/car_list"
@@ -27,14 +27,11 @@
         android:layout_below="@id/spinner_model"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginLeft="@dimen/standard_margin"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginRight="@dimen/standard_margin"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.example.android.songdetailstart.MainActivity"
-        tools:listitem="@layout/song_list_content" />>
+        tools:context="com.example.android.pr"
+        tools:listitem="@layout/car_list_content" />>
 
-
-    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
