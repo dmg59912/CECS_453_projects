@@ -45,9 +45,7 @@ public class MainActivity extends AppCompatActivity
     List<String> spinner_model_list;
 
     private String selected_make;
-
-    private GetCarModel modelTask;
-
+    private String selected_model;
 
     public static boolean two_panel = false;
 
@@ -86,12 +84,22 @@ public class MainActivity extends AppCompatActivity
 
                 selected_make = car_make_spinner.getItemAtPosition(position).toString();
 
-                Toast.makeText(MainActivity.this, selected_make, Toast.LENGTH_SHORT).show();
+                new GetCarModel(selected_make).execute();
 
-                modelTask = new GetCarModel(selected_make);
+            }
 
-                modelTask.execute();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        car_model_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selected_model = car_model_spinner.getItemAtPosition(position).toString();
+
+                Toast.makeText(MainActivity.this, selected_model, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -113,12 +121,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
-   // {
-
-   //}
-
-    private class GetCarMake extends AsyncTask<Void, Void, Void>
+   private class GetCarMake extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected void onPreExecute() {
@@ -209,7 +212,6 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-
             super.onPreExecute();
         }
 
@@ -238,15 +240,15 @@ public class MainActivity extends AppCompatActivity
         private void GetModelsJSON(String make)
         {
             String id = "0";
+            spinner_model_list.clear();
 
-            
             for(int i = 0; i < car_make_list.size(); i++)
-                if(car_make_list.get(i).get("vehicle_make").compareTo(make) == 0)
+                if(car_make_list.get(i).get("vehicle_make").compareTo(make) == 0) {
                     id = car_make_list.get(i).get("id");
-
+                    break;
+                }
 
             HttpHandler handler = new HttpHandler();
-
 
             //Calling jasonArray and Jason object to map our Arraylist<Hashmap>
             try {
@@ -267,9 +269,61 @@ public class MainActivity extends AppCompatActivity
                     vModel.put("vehicle_make_id",v_make_id);
 
                     spinner_model_list.add(model);
-                    car_make_list.add(vModel);
+                    car_model_list.add(vModel);
 
-                   /*
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Collections.sort(spinner_model_list);
+        }
+
+    }
+    private class GetCarList extends AsyncTask<Void,Void,Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            getListJSON();
+
+            return null;
+        }
+
+        private void getListJSON(){
+            HttpHandler handler = new HttpHandler();
+
+            //Calling jasonArray and Jason object to map our Arraylist<Hashmap>
+            try {
+                String jsonStr = handler.makeServiceCall(url_model + id);
+                JSONArray c_models = new JSONArray(jsonStr);
+
+                for(int i = 0 ; i < c_models.length(); ++i)
+                {
+
+                    JSONObject models_array  =  c_models.getJSONObject(i);
+
+                    String model = models_array.getString("model");
+                    String v_make_id = models_array.getString("vehicle_make_id");
+
+                    HashMap<String,String> vModel = new HashMap<>();
+                    vModel.put("id", id);
+                    vModel.put("model",model);
+                    vModel.put("vehicle_make_id",v_make_id);
+
+                    spinner_model_list.add(model);
+                    car_model_list.add(vModel);
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+/*
                     JSONObject models_array  =  c_models.getJSONObject(i);
 
                     String color = models_array.getString("color");
@@ -296,23 +350,6 @@ public class MainActivity extends AppCompatActivity
 
                     car_model_list.add(vModels);
                     */
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Collections.sort(spinner_model_list);
-
-        }
-
-
-
-    }
-
-
-
 
 
 
