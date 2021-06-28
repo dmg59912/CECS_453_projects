@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private static String url_make = "https://thawing-beach-68207.herokuapp.com/carmakes";
     private static String url_model = "https://thawing-beach-68207.herokuapp.com/carmodelmakes/";
     private static String url_list = "https://thawing-beach-68207.herokuapp.com/cars/";
+    private static String url_condition = "https://thawing-beach-68207.herokuapp.com/cars/3484";
 
     ArrayList<HashMap<String,String>> car_make_list;
     ArrayList<HashMap<String,String>> car_model_list;
@@ -371,6 +372,8 @@ public class MainActivity extends AppCompatActivity
 
                     car_model_list.add(vModels);
                     */
+
+
 
 
 
