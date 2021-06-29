@@ -34,16 +34,26 @@
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal"
         android:showDividers="middle"
-        tools:context="com.example.android.songdetailstart.MainActivity">
+        tools:context="com.example.android.carDetailStart.MainActivity">
+
+        <!--
+             This layout is a two-pane layout for the Songs
+             master/detail flow.
+
+             -->
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/car_list_rv"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/car_list"
+            android:name="com.example.android.cars.carListFragment"
             android:layout_width="@dimen/item_width"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/standard_margin"
             android:layout_marginRight="@dimen/standard_margin"
             app:layoutManager="LinearLayoutManager"
-            tools:context="com.example.android.pr"
+            tools:context="com.example.android.carDetailStart.MainActivity"
             tools:listitem="@layout/car_list_content" />
 
         <FrameLayout

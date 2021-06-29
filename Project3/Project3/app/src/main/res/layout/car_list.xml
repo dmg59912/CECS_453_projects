@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    carDetailFragment
 
     <Spinner
         android:id="@+id/spinner_make"
@@ -21,7 +22,9 @@
         android:layout_below="@id/spinner_make" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/car_list_rv"
+
+        android:id="@+id/car_list"
+        android:name="com.example.android.cars.carListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/spinner_model"
@@ -30,8 +33,8 @@
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginRight="@dimen/standard_margin"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.example.android.pr"
-        tools:listitem="@layout/car_list_content" />>
+        tools:context="com.example.android.carDetailStart.MainActivity"
+        tools:listitem="@layout/car_list_content" />
 
 
 </RelativeLayout>
