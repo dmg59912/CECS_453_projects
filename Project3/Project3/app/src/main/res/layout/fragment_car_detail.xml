@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".carDetailFragment">
-
     <TextView
         android:id="@+id/txt_model"
         android:layout_width="200dp"
