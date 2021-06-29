@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -52,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_car_list);
 
         //Initialize View Variables
-        //list_view = findViewById(R.id.list);
         car_make_spinner = findViewById(R.id.spinner_make);
         car_model_spinner = findViewById(R.id.spinner_model);
 
@@ -67,9 +71,6 @@ public class MainActivity extends AppCompatActivity
 
         if (findViewById(R.id.car_detail_container)!=null)
             two_panel = true;
-
-
-        //test place holders for now ///////////////////////////////////////////////////////
 
         new GetCarMake().execute();
 
@@ -105,9 +106,6 @@ public class MainActivity extends AppCompatActivity
 
         });
 
-
-        
-        
     }
 
    private class GetCarMake extends AsyncTask<Void, Void, Void>
@@ -296,7 +294,7 @@ public class MainActivity extends AppCompatActivity
             RecyclerView rv = findViewById(R.id.car_list_rv);
             rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
         }
-        
+
         private void getListJSON(String make, String model){
 
             String make_id = "";
@@ -359,14 +357,90 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
-        ViewHolder(View view)
+        private final ArrayList<HashMap<String,String>> car_item_list;
+
+        SimpleItemRecyclerViewAdapter(ArrayList<HashMap<String, String>> car_item_list)
         {
-            super(view);
+            this.car_item_list = car_item_list;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.car_list_content,
+                    parent, false);
+
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position)
+        {
+            holder.mIdView.setText("id: " + car_item_list.get(position).get("item_id"));
+            holder.mContentView.setText(car_item_list.get(position).get("make") + ": " + car_item_list.get(position).get("model"));
+
+            holder.mView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v)
+                {
+
+                    if (MainActivity.two_panel)
+                    {
+                        carDetailFragment frg = carDetailFragment.newInstance(car_item_list.get(holder.getAdapterPosition()));
+
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.car_detail_container, frg)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                    else
+                    {
+                        //getApplicationContext()
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, CarDetailActivity.class);
+
+                        intent.putExtra("make", car_item_list.get(holder.getAdapterPosition()).get("make"));
+                        intent.putExtra("model" , car_item_list.get(holder.getAdapterPosition()).get("model"));
+                        intent.putExtra("price" , car_item_list.get(holder.getAdapterPosition()).get("price"));
+                        intent.putExtra("veh_description" , car_item_list.get(holder.getAdapterPosition()).get("veh_description"));
+                        intent.putExtra("created_at" , car_item_list.get(holder.getAdapterPosition()).get("created_at"));
+
+                        context.startActivity(intent);
+                    }
 
 
+
+
+
+                }
+
+
+            });
+
+        }
+
+        @Override
+        public int getItemCount()
+        {
+            return car_item_list.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder
+        {
+            final View mView;
+            final TextView mIdView;
+            final TextView mContentView;
+
+            ViewHolder(View view)
+            {
+                super(view);
+                mView = view;
+                mIdView = view.findViewById(R.id.car_id);
+                mContentView = view.findViewById(R.id.car_model);
+
+            }
         }
     }
 

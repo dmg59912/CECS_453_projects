@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link carDetailFragment#newInstance} factory method to
@@ -60,5 +62,19 @@ public class carDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_car_detail, container, false);
+    }
+
+    public static carDetailFragment newInstance(HashMap<String, String> car_details)
+    {
+        carDetailFragment frg  = new carDetailFragment();
+        Bundle arguments = new Bundle();
+
+        arguments.putString("make", car_details.get("make"));
+        arguments.putString("model" , car_details.get("model"));
+        arguments.putString("price" , car_details.get("price"));
+        arguments.putString("veh_description" , car_details.get("veh_description"));
+        arguments.putString("created_at" , car_details.get("created_at"));
+        frg.setArguments(arguments);
+        return frg;
     }
 }
