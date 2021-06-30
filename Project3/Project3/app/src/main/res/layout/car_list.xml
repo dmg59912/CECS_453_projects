@@ -22,6 +22,7 @@
         android:layout_below="@id/spinner_make" />
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/car_list"
         android:name="com.example.android.cars.carListFragment"
         android:layout_width="match_parent"
