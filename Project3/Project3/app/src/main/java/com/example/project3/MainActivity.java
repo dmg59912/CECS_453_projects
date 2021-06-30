@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            RecyclerView rv = findViewById(R.id.car_list_rv);
+            RecyclerView rv = findViewById(R.id.car_list);
             rv.setAdapter(new SimpleItemRecyclerViewAdapter(car_item_list));
         }
 
