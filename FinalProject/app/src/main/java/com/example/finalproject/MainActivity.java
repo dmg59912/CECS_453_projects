@@ -4,6 +4,7 @@ package com.example.finalproject;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -27,12 +28,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
+        //Bind the Main Activity Layout to a variable
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.appBarMain.toolbar);
+
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // Setup Navigation Header
+        setupNavigationHeader(savedInstanceState);
+
     }
 
     @Override
@@ -67,4 +71,14 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void setupNavigationHeader(Bundle savedInstanceState){
+
+        TextView nav_username = findViewById(R.id.nav_username_textview);
+        TextView nav_email = findViewById(R.id.nav_email_textview);
+
+        nav_username.setText(savedInstanceState.getString("username"));
+        nav_email.setText(savedInstanceState.getString("email"));
+    }
+
 }
