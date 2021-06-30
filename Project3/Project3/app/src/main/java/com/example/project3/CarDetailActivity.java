@@ -7,13 +7,15 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CarDetailActivity extends AppCompatActivity {
 
 
-    private TextView make_model_txt, price_txt, details_txt, created_txt;
+    private TextView make_model_txt, price_txt, created_txt;
+    private EditText details_txt;
     private ImageView car_image;
     private Button back_button;
 
@@ -32,7 +34,7 @@ public class CarDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         make_model_txt.setText(intent.getStringExtra("make") + " - " + intent.getStringExtra("model"));
-        price_txt.setText(intent.getStringExtra("price"));
+        price_txt.setText("$" + intent.getStringExtra("price"));
         details_txt.setText(intent.getStringExtra("veh_description"));
         created_txt.setText(intent.getStringExtra("created_at"));
 

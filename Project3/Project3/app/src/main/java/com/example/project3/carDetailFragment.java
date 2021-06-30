@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -17,14 +20,18 @@ import java.util.HashMap;
  */
 public class carDetailFragment extends Fragment {
 
+    private TextView make_model_txt, price_txt, created_txt;
+    private EditText details_txt;
+    private ImageView car_image;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String make, model, price, detail, created;
+
 
     public carDetailFragment() {
         // Required empty public constructor
@@ -52,8 +59,11 @@ public class carDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            make = getArguments().getString("make");
+            model = getArguments().getString("model");
+            price = getArguments().getString("price");
+            detail = getArguments().getString("veh_description");
+            created = getArguments().getString("created_at");
         }
     }
 
@@ -61,7 +71,23 @@ public class carDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_car_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_car_detail, container, false);
+
+        make_model_txt = view.findViewById(R.id.make_model_frag_txt);
+        price_txt = view.findViewById(R.id.price_frag_txt);
+        created_txt = view.findViewById(R.id.update_frag_txt);
+        details_txt = view.findViewById(R.id.details_frag_txt);
+        car_image = view.findViewById(R.id.car_frag_img);
+
+
+        make_model_txt.setText(make + " - " + model);
+        price_txt.setText("$" + price);
+        details_txt.setText(detail);
+        created_txt.setText(created);
+        return view;
+
+
+
     }
 
     public static carDetailFragment newInstance(HashMap<String, String> car_details)
