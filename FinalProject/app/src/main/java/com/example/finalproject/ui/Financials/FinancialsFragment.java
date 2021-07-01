@@ -17,11 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-<<<<<<< HEAD
+
 import com.example.finalproject.R;
-=======
+
 import com.example.finalproject.DBHelper;
->>>>>>> rios
+
 import com.example.finalproject.databinding.FragmentFinancialsBinding;
 
 import java.math.BigInteger;
