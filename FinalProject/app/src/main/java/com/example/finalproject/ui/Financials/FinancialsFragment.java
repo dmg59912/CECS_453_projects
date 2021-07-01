@@ -12,15 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.finalproject.DBHelper;
 import com.example.finalproject.databinding.FragmentFinancialsBinding;
 
 public class FinancialsFragment extends Fragment {
+
+    DBHelper users_data;
 
     private FinancialsViewModel financialsViewModel;
     private FragmentFinancialsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         financialsViewModel =
                 new ViewModelProvider(this).get(FinancialsViewModel.class);
 

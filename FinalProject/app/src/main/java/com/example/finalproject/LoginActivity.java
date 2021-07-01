@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity
         edt_username = findViewById(R.id.edt_user_signup_activity);
 
 
-
         //log in user to main account
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
