@@ -29,4 +29,7 @@
     <string name="passerror">Invalid Password</string>
     <string name="emailerror">Invalid Email</string>
     <string name="repasserror">Passwords DO NOT MATCH</string>
+    <string name="financials_header">Enter Financial Information</string>
+    <string name="finance_amount_hint">Enter Amount</string>
+    <string name="finance_submit">Submit</string>
 </resources>
