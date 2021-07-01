@@ -104,7 +104,7 @@ public class DBHelper extends SQLiteOpenHelper
         String sql;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        sql = "select username,password FROM " + USERS_TABLE_CRED;
+        sql = "select user_name,password FROM " + USERS_TABLE_CRED;
         Cursor curs = db.rawQuery(sql,null);
 
         curs.moveToFirst();

@@ -29,12 +29,13 @@ public class LoginActivity extends AppCompatActivity
         edt_password = findViewById(R.id.edt_password);
         edt_username = findViewById(R.id.edt_user_signup_activity);
 
-        users_data = new DBHelper(getApplicationContext());
+
 
         //log in user to main account
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                users_data = new DBHelper(getApplicationContext());
 
                 String check_user = edt_username.getText().toString();
                 String check_password = edt_password.getText().toString();
