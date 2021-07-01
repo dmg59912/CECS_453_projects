@@ -41,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Bind the Main Activity Layout to a variable
+<<<<<<< HEAD
         DBHelper users_data = new DBHelper(getApplicationContext());
+=======
+        //users_data = new DBHelper(getApplicationContext());
+>>>>>>> rios
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
