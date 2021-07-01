@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.databinding.ActivityMainBinding;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -53,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // Setup Navigation Header
-        setupNavigationHeader(savedInstanceState);
+        //setupNavigationHeader(savedInstanceState);
 
     }
 
@@ -73,12 +75,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupNavigationHeader(Bundle savedInstanceState){
-
-        TextView nav_username = findViewById(R.id.nav_username_textview);
+        TextView nav_username = findViewById(R.layout.nav_header_main);
         TextView nav_email = findViewById(R.id.nav_email_textview);
 
-        nav_username.setText(savedInstanceState.getString("username"));
-        nav_email.setText(savedInstanceState.getString("email"));
+        nav_username.setText("testUser");//savedInstanceState.getString("username"));
+        nav_email.setText("testUser@gmail.com");//savedInstanceState.getString("email"));
     }
 
 }

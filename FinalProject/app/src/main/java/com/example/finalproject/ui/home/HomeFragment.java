@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.finalproject.databinding.FragmentHomeBinding;
+import com.jjoe64.graphview.GraphView;
 
 public class HomeFragment extends Fragment {
 
@@ -28,11 +29,13 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+        final TextView homeUsernameText = binding.homeUsernameText;
+        final GraphView homeReportGraph = binding.homeReportGraph;
+
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                homeUsernameText.setText(s);
             }
         });
         return root;
