@@ -16,4 +16,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
     <string name="report_label">Monthly Finance Report</string>
+    <string name="splash_header_text">Finance Tracker</string>
 </resources>

@@ -7,5 +7,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+
+    <dimen name="splash_textsize">48sp</dimen>
     <dimen name="user_textsize">24sp</dimen>
 </resources>

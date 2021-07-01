@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.finalproject.databinding.FragmentHomeBinding;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class HomeFragment extends Fragment {
 
@@ -29,15 +31,20 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView homeUsernameText = binding.homeUsernameText;
+
         final GraphView homeReportGraph = binding.homeReportGraph;
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        homeViewModel.getData(0).observe(getViewLifecycleOwner(), new Observer<LineGraphSeries<DataPoint>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                homeUsernameText.setText(s);
+            public void onChanged(LineGraphSeries<DataPoint> dataPointLineGraphSeries) {
+
+                homeReportGraph.addSeries(dataPointLineGraphSeries);
+
             }
         });
+
+
         return root;
     }
 
