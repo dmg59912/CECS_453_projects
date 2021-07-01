@@ -3,11 +3,13 @@ package com.example.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
@@ -59,8 +61,17 @@ public class SignupActivity extends AppCompatActivity {
                 String passwordCred = edt_password.getText().toString();
                 String emailCred = edt_email.getText().toString();
 
-                if(validation.validate() && (user_credentials.checkUserValidation(usernameCred,passwordCred)== false))
-                    user_credentials.insertUser(usernameCred,passwordCred,emailCred);
+                if( validation.validate() && user_credentials.checkUserValidation(usernameCred) == true) {
+                    Toast.makeText(SignupActivity.this,"User already Exist, Please log in",Toast.LENGTH_LONG).show();
+                }
+                else if  (validation.validate()  && user_credentials.checkUserValidation(usernameCred) == false)
+                {
+                    Toast.makeText(SignupActivity.this,"Account Created ",Toast.LENGTH_LONG).show();
+                    user_credentials.insertUser(usernameCred, passwordCred, emailCred);
+                }
+                Intent backToLogin = new Intent(getApplicationContext(),LoginActivity.class);
+
+                startActivity(backToLogin);
 
             }
         });

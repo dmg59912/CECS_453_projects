@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
-    DBHelper users_data;
 
 
     @Override
