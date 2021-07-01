@@ -17,4 +17,13 @@
     <string name="login">Login</string>
     <string name="report_label">Monthly Finance Report</string>
     <string name="splash_header_text">Finance Tracker</string>
+    <string name="retype_edt">Retype Password</string>
+    <string name="password_edt_sg">Enter Password</string>
+    <string name="User_name_edt">Enter User Name</string>
+    <string name="email_edt">Email</string>
+    <string name="Sign_me_btn">SIGN ME UP!</string>
+    <string name="nameerror">Invalid User Name</string>
+    <string name="passerror">Invalid Password</string>
+    <string name="emailerror">Invalid Email</string>
+    <string name="repasserror">Passwords DO NOT MATCH</string>
 </resources>

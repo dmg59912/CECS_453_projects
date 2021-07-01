@@ -11,12 +11,12 @@
 
 
     <EditText
-        android:id="@+id/edt_username"
+        android:id="@+id/edt_user_signup_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/Username" />
+        android:hint="@string/Username" />
 
     <EditText
         android:id="@+id/edt_password"
@@ -25,7 +25,7 @@
         android:ems="10"
         android:layout_marginTop="50dp"
         android:inputType="textPersonName"
-        android:text="@string/Password" />
+        android:hint="@string/Password" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
             android:text="@string/sign_up" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_log"
             android:layout_marginHorizontal="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
