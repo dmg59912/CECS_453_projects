@@ -11,8 +11,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_contacts">Contacts</string>
-    <string name="Username">Username</string>
-    <string name="Password">Password</string>
+    <string name="Username"></string>
+    <string name="Password"></string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
     <string name="retype_edt">Retype Password</string>

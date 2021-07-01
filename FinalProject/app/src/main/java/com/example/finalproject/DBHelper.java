@@ -12,11 +12,10 @@ public class DBHelper extends SQLiteOpenHelper
 {
 
     //setting names for our tables
-    public static final String DATABASE_NAME = "DataUsers.db";
+    public static final String DATABASE_NAME = "Finance_tracker.db";
     public static final String USERS_TABLE_CRED = "user_credentials";
     public static final String USERS_TABLE_USER = "user";
     public static final String USERS_TABLE_ACCOUNT = "account";
-    public static final String USER_TABLE_EXPENSES = "expenses";
 
 
     //setting names for our columns
@@ -33,10 +32,8 @@ public class DBHelper extends SQLiteOpenHelper
     public static final String ACCOUNT_NUM = "account_number";
     public static final String ACCOUNT_SAVING = "annual_saving";
     public static final String ACCOUNT_INCOME = "annual_income";
+    public static final String Account_DATE = "date";
 
-
-    public static final String EXPENSES = "account_number";
-    public static final String EXPENSES_EXP = "expenses";
 
     public DBHelper(Context context)
     {
@@ -46,25 +43,21 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String cred,user_info, account_id,expenses;
-
-        expenses = "create table " + USER_TABLE_EXPENSES +
-                "(account_number integer PRIMARY KEY, expenses decimal)";
-        db.execSQL(expenses);
+        String cred,user_info, account_id;
 
 
-        account_id = "create table " + USERS_TABLE_ACCOUNT +
-                "(account_id integer PRIMARY KEY, account_number integer, annual_saving decimal, annual_income decimal, FOREIGN KEY(account_number) REFERENCES " + USER_TABLE_EXPENSES + "(account_number) )";
+        account_id = "create table if not exists " + USERS_TABLE_ACCOUNT +
+                "(account_id integer PRIMARY KEY, expenses_income text, amount decimal, annual_income decimal, created date )";
         db.execSQL(account_id);
 
 
 
-        user_info ="create table " + USERS_TABLE_USER +
+        user_info ="create table  if not exists " + USERS_TABLE_USER +
                 "(user_id integer PRIMARY KEY, account_id integer, name text, FOREIGN KEY(account_id) REFERENCES " + USERS_TABLE_ACCOUNT + "(account_id) )";
         db.execSQL(user_info);
 
 
-        cred = "create table "   + USERS_TABLE_CRED +
+        cred = "create table if not exists "   + USERS_TABLE_CRED +
                 "(user_id integer  PRIMARY KEY AUTOINCREMENT , username text ,password text, email text, FOREIGN KEY (user_id) REFERENCES "+ USERS_TABLE_USER + "(user_id) )";
         db.execSQL(cred);
 
@@ -110,6 +103,8 @@ public class DBHelper extends SQLiteOpenHelper
         Cursor curs = db.rawQuery(sql,null);
 
         curs.moveToFirst();
+        //if ((curs.getString(curs.getColumnIndex(DBHelper.CRED_USERNAME)) ) == null)
+           // return false;
 
         while (!curs.isAfterLast())
         {
