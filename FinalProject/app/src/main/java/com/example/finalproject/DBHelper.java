@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.util.Date;
+
 
 public class DBHelper extends SQLiteOpenHelper
 {
@@ -36,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper
     public static final String ACCOUNT_AMMOUNT = "amount";
     public static final String ACCOUNT_EXPENSES = "expenses_income";
     public static final String ACCOUNT_INCOME = "annual_income";
-    public static final String Account_DATE = "created";
+    public static final String ACCOUNT_DATE = "created";
 
 
     public DBHelper(Context context)
@@ -73,7 +75,30 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
-    //public void insert_
+    public String get_user()
+    {
+        String sql;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        sql = "select user_name From user Where user_name.account = user_name.user_credentials  ";
+        Cursor curs = db.rawQuery(sql,null);
+
+        String Check_user = curs.getString(curs.getColumnIndex(DBHelper.CRED_USERNAME));
+        return Check_user;
+    }
+    public void insert_income( String expenses, double amount, Date created)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ACCOUNT_EXPENSES, expenses);
+        values.put(ACCOUNT_AMMOUNT, amount);
+        values.put(ACCOUNT_INCOME,amount);
+        values.put(ACCOUNT_DATE, String.valueOf(created));
+
+        db.insert(USERS_TABLE_ACCOUNT,null, values);
+
+    }
     public void insertUser(String user_name, String password,String email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -104,7 +129,7 @@ public class DBHelper extends SQLiteOpenHelper
         String sql;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        sql = "select username,password FROM " + USERS_TABLE_CRED;
+        sql = "select user_name,password FROM " + USERS_TABLE_CRED;
         Cursor curs = db.rawQuery(sql,null);
 
         curs.moveToFirst();

@@ -38,16 +38,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Bind the Main Activity Layout to a variable
+<<<<<<< HEAD
         DBHelper users_data = new DBHelper(getApplicationContext());
+=======
+        //users_data = new DBHelper(getApplicationContext());
+>>>>>>> rios
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
+
 
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
