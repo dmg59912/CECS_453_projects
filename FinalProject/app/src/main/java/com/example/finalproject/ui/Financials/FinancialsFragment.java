@@ -17,7 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+<<<<<<< HEAD
 import com.example.finalproject.R;
+=======
+import com.example.finalproject.DBHelper;
+>>>>>>> rios
 import com.example.finalproject.databinding.FragmentFinancialsBinding;
 
 import java.math.BigInteger;
@@ -25,6 +29,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class FinancialsFragment extends Fragment {
+
+    DBHelper users_data;
 
     private FinancialsViewModel financialsViewModel;
     private FragmentFinancialsBinding binding;
@@ -38,6 +44,7 @@ public class FinancialsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         financialsViewModel =
                 new ViewModelProvider(this).get(FinancialsViewModel.class);
 
