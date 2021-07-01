@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity
     private Button btn_login,btn_signup;
     private EditText edt_username,edt_password;
 
+    DBHelper users_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity
         edt_password = findViewById(R.id.edt_password);
         edt_username = findViewById(R.id.edt_user_signup_activity);
 
-
+        users_data = new DBHelper(getApplicationContext());
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +38,16 @@ public class LoginActivity extends AppCompatActivity
                 String check_user = edt_username.getText().toString();
                 String check_password = edt_password.getText().toString();
 
-                Toast.makeText(getApplicationContext(),check_user + "  " + check_password,Toast.LENGTH_SHORT).show();
+
+                if(users_data.logIn_check(check_user, check_password) == false)
+                {
+                    Toast.makeText(getApplicationContext(), "User NOT IN DATABASE", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent main = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(main);
+                }
 
             }
         });

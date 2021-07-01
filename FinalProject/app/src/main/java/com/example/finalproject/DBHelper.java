@@ -5,13 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 
 public class DBHelper extends SQLiteOpenHelper
 {
 
     //setting names for our tables
-    public static final String DATABASE_NAME = "DBUsers.db";
+    public static final String DATABASE_NAME = "DataUsers.db";
     public static final String USERS_TABLE_CRED = "user_credentials";
     public static final String USERS_TABLE_USER = "user";
     public static final String USERS_TABLE_ACCOUNT = "account";
@@ -64,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper
 
 
         cred = "create table "   + USERS_TABLE_CRED +
-                "(user_id integer  PRIMARY KEY AUTOINCREMENT, username text ,password text, email text, CONSTRAINT login_info PRIMARY KEY (user_id,username,password),FOREIGN KEY (user_id) REFERENCES "+ USERS_TABLE_USER + "(user_id) )";
+                "(user_id integer  PRIMARY KEY AUTOINCREMENT , username text ,password text, email text, FOREIGN KEY (user_id) REFERENCES "+ USERS_TABLE_USER + "(user_id) )";
         db.execSQL(cred);
 
 
@@ -80,15 +81,52 @@ public class DBHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        //values.put(CRED_ID,)
-        values.put(CRED_USERNAME, user_name);
-        values.put(CRED_PASS,password);
-        values.put(CRED_EMAIL,email);
+        if(checkUserValidation(user_name) == false) {
+            values.put(CRED_USERNAME, user_name);
+            values.put(CRED_PASS, password);
+            values.put(CRED_EMAIL, email);
 
-        db.insert(USERS_TABLE_CRED, null, values);
+            db.insert(USERS_TABLE_CRED, null, values);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"User Name Already Exist" ,Toast.LENGTH_LONG).show();
+        }
+
     }
 
-    public boolean checkUserValidation(String user_name, String password)
+    private Context getApplicationContext() {
+        return null;
+    }
+
+    //log user in if credentials are valid
+    public boolean logIn_check(String username, String password)
+    {
+        boolean no_matching_userdata = false;
+        String sql;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        sql = "select username,password FROM " + USERS_TABLE_CRED;
+        Cursor curs = db.rawQuery(sql,null);
+
+        curs.moveToFirst();
+
+        while (!curs.isAfterLast())
+        {
+            String Check_user = curs.getString(curs.getColumnIndex(DBHelper.CRED_USERNAME));
+            String Check_password = curs.getString(curs.getColumnIndex(DBHelper.CRED_PASS));
+
+            if(Check_user.compareTo(username) == 0 && Check_password.compareTo(password) == 0)
+                return true;
+            curs.moveToNext();
+
+
+        }
+        return no_matching_userdata;
+    }
+
+    //check if user name exist in the data when signing  up
+    public boolean checkUserValidation(String user_name)
     {
         boolean account_exist = false;
         String sql;
@@ -99,14 +137,19 @@ public class DBHelper extends SQLiteOpenHelper
 
         curs.moveToFirst();
 
+
+
      while(!curs.isAfterLast())
      {
-         if(curs.getString(curs.getColumnIndex(CRED_USERNAME) ) == user_name && curs.getString(curs.getColumnIndex(CRED_PASS)) == password)
+         String Check_user = curs.getString(curs.getColumnIndex(DBHelper.CRED_USERNAME));
+         if(Check_user.compareTo(user_name) == 0)
          {
              account_exist = true;
+             break;
          }
          curs.moveToNext();
      }
+     curs.close();
         return account_exist;
 
     }

@@ -3,6 +3,7 @@ package com.example.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -59,8 +60,13 @@ public class SignupActivity extends AppCompatActivity {
                 String passwordCred = edt_password.getText().toString();
                 String emailCred = edt_email.getText().toString();
 
-                if(validation.validate() && (user_credentials.checkUserValidation(usernameCred,passwordCred)== false))
-                    user_credentials.insertUser(usernameCred,passwordCred,emailCred);
+
+                if( validation.validate()) {
+                    user_credentials.insertUser(usernameCred, passwordCred, emailCred);
+                }
+                Intent backToLogin = new Intent(getApplicationContext(),LoginActivity.class);
+
+                startActivity(backToLogin);
 
             }
         });
