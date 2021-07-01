@@ -72,6 +72,19 @@ public class HomeViewModel extends ViewModel {
 
         mSeries.setValue(series);
 
+        /*
+        Date compDate = calender.getTime();
+            long databaseDate = Date.parse(MainActivity.TEST_DATA.get(i).get("date"));
+            Double amount = Double.parseDouble(MainActivity.TEST_DATA.get(i).get("amount"));
+
+            // ID | String Income/EXpense | DOuble AMount | Date date
+
+            // Select Income AND Amount AND Date where ID
+            if(compDate.compareTo(databaseDate) == 0) {
+                series.appendData(new DataPoint(databaseDate, amount), true, count);
+                calender.add(Calendar.DATE,1);
+            }
+         */
 
         return mSeries;
     }

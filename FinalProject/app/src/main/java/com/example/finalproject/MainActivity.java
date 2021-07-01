@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,7 +30,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int TEST_DATA_SIZE = 365;
+    public static final int TEST_DATA_SIZE = 365;
     public static ArrayList<HashMap<String,String>> TEST_DATA;
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -50,9 +52,19 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will Eventually Add Financials", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "TODO - let fab handle adding financial data", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
+            }
+        });
+
+        binding.appBarMain.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Snackbar.make(binding.getRoot(), "TODO - add user settings activity", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                return false;
             }
         });
 

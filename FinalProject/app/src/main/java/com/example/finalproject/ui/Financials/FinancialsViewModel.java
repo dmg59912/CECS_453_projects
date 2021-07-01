@@ -16,4 +16,5 @@ public class FinancialsViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
 }
