@@ -12,27 +12,31 @@ public class DBHelper extends SQLiteOpenHelper
 {
 
     //setting names for our tables
-    public static final String DATABASE_NAME = "Finance_tracker.db";
+    public static final String DATABASE_NAME = "Finance_Tracker.db";
     public static final String USERS_TABLE_CRED = "user_credentials";
-    public static final String USERS_TABLE_USER = "user";
+    //public static final String USERS_TABLE_USER = "user";
     public static final String USERS_TABLE_ACCOUNT = "account";
 
 
     //setting names for our columns
     public static final String CRED_ID = "user_id";
-    public static final String CRED_USERNAME = "username";
+    public static final String CRED_USERNAME = "user_name";
     public static final String CRED_PASS = "password";
     public static final String CRED_EMAIL = "email";
 
-    public static final String USER_ID = "user_id";
-    public static final String USER_ACCOUNT = "account_id";
-    public static final String USER_NAME = "name";
+    //**save for later //
+    //public static final String USER_ID = "user_id";
+    //public static final String USER_ACCOUNT = "account_id";
+    //public static final String USER_NAME = "name";
 
-    public static final String ACCOUNT_ID = "account_id";
-    public static final String ACCOUNT_NUM = "account_number";
-    public static final String ACCOUNT_SAVING = "annual_saving";
+    //**    ///
+
+    public static final String ACCOUNT_ID = "user_id";
+    public static final String ACCOUNT_USERNAME = "user_name";
+    public static final String ACCOUNT_AMMOUNT = "amount";
+    public static final String ACCOUNT_EXPENSES = "expenses_income";
     public static final String ACCOUNT_INCOME = "annual_income";
-    public static final String Account_DATE = "date";
+    public static final String Account_DATE = "created";
 
 
     public DBHelper(Context context)
@@ -43,22 +47,22 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String cred,user_info, account_id;
+        String cred, account_id;
 
 
         account_id = "create table if not exists " + USERS_TABLE_ACCOUNT +
-                "(account_id integer PRIMARY KEY, expenses_income text, amount decimal, annual_income decimal, created date )";
+                "(user_name text PRIMARY KEY, user_id integer, expenses_income text, amount decimal, annual_income decimal, created date )";
         db.execSQL(account_id);
 
 
-
+        /*  save for a later time
         user_info ="create table  if not exists " + USERS_TABLE_USER +
                 "(user_id integer PRIMARY KEY, account_id integer, name text, FOREIGN KEY(account_id) REFERENCES " + USERS_TABLE_ACCOUNT + "(account_id) )";
-        db.execSQL(user_info);
+        db.execSQL(user_info); */
 
 
         cred = "create table if not exists "   + USERS_TABLE_CRED +
-                "(user_id integer  PRIMARY KEY AUTOINCREMENT , username text ,password text, email text, FOREIGN KEY (user_id) REFERENCES "+ USERS_TABLE_USER + "(user_id) )";
+                "(user_id integer  PRIMARY KEY AUTOINCREMENT , user_name text ,password text, email text, FOREIGN KEY (user_name) REFERENCES "+ USERS_TABLE_ACCOUNT + "(user_name) )";
         db.execSQL(cred);
 
 
@@ -69,6 +73,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
+    //public void insert_
     public void insertUser(String user_name, String password,String email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -131,8 +136,6 @@ public class DBHelper extends SQLiteOpenHelper
         Cursor curs = db.rawQuery(sql,null);
 
         curs.moveToFirst();
-
-
 
      while(!curs.isAfterLast())
      {
