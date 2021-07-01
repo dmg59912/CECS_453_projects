@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Bind the Main Activity Layout to a variable
-        users_data = new DBHelper(getApplicationContext());
+        DBHelper users_data = new DBHelper(getApplicationContext());
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Will Eventually Add Financials", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
             }
