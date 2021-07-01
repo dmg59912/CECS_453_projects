@@ -21,7 +21,15 @@ import com.example.finalproject.databinding.ActivityMainBinding;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final int TEST_DATA_SIZE = 365;
+    public static ArrayList<HashMap<String,String>> TEST_DATA;
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -55,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_contacts)
+                R.id.nav_home, R.id.nav_finances) //, R.id.nav_slideshow, R.id.nav_contacts
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -81,11 +89,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupNavigationHeader(Bundle savedInstanceState){
-        TextView nav_username = findViewById(R.layout.nav_header_main);
-        TextView nav_email = findViewById(R.id.nav_email_textview);
+        //TextView nav_username = findViewById(R.layout.nav_header_main);
+        //TextView nav_email = findViewById(R.id.nav_email_textview);
 
-        nav_username.setText("testUser");//savedInstanceState.getString("username"));
-        nav_email.setText("testUser@gmail.com");//savedInstanceState.getString("email"));
+//        nav_username.setText("testUser");//savedInstanceState.getString("username"));
+  //      nav_email.setText("testUser@gmail.com");//savedInstanceState.getString("email"));
     }
 
+
+    public static void initializeTestData(){
+        TEST_DATA = new ArrayList<>();
+
+        Calendar calender = Calendar.getInstance();
+        calender.add(Calendar.DATE,TEST_DATA_SIZE * -1);
+
+        for(int i = 0; i < TEST_DATA_SIZE; i++) {
+            HashMap<String,String> DataMap = new HashMap<>();
+            DataMap.put("id", "1");
+            DataMap.put("financial_operation", "income");
+            DataMap.put("amount", Integer.toString(new Random().nextInt(100)*i));
+            DataMap.put("date", calender.getTime().toString());
+
+            TEST_DATA.add(DataMap);
+            calender.add(Calendar.DATE,1);
+
+
+        }
+    }
 }
